@@ -28,6 +28,15 @@ jobs:
 
       - name: Set PYTHONPATH  
         run: echo "PYTHONPATH=$PWD" >> $GITHUB_ENV
+      - name: Debug Environment
+        run: |
+          pwd
+          ls -R
+          python -c "import sys; print(sys.path)"
 
+        - name: Test Import
+          run: python -c "from utils.api_client import APIClient; print('Import successful!')"
+
+      
       - name: Run API Tests
         run: pytest --html=reports/test_report.html --self-contained-html

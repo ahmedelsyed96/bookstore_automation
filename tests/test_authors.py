@@ -1,5 +1,5 @@
 import pytest
-from utils.api_client import APIClient
+from bookstore_automation.utils.api_client import APIClient
 
 @pytest.mark.author
 def test_create_author():
