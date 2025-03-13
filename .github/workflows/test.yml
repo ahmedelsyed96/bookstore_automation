@@ -26,17 +26,17 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Set PYTHONPATH  
-        run: echo "PYTHONPATH=$PWD" >> $GITHUB_ENV
+      - name: Set PYTHONPATH
+        run: echo "PYTHONPATH=$GITHUB_WORKSPACE" >> $GITHUB_ENV
+
       - name: Debug Environment
         run: |
           pwd
           ls -R
           python -c "import sys; print(sys.path)"
 
-        - name: Test Import
-          run: python -c "from utils.api_client import APIClient; print('Import successful!')"
+      - name: Test Import
+        run: python -c "from utils.api_client import APIClient; print('Import successful!')"
 
-      
       - name: Run API Tests
-        run: pytest --html=reports/test_report.html --self-contained-html
+        run: pytest tests --maxfail=3 --disable-warnings -v
