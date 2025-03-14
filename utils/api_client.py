@@ -1,7 +1,7 @@
 import requests
 
 # Base URL of the API (Replace with the actual API endpoint)
-BASE_URL = "https://api.example.com"
+BASE_URL = "https://openlibrary.org"
 
 class APIClient:
     """A class to interact with the Bookstore API."""
@@ -18,9 +18,9 @@ class APIClient:
         return response
 
     @staticmethod
-    def get_book(book_id):
-        """Retrieves book details by ID."""
-        response = requests.get(f"{BASE_URL}/books/{book_id}")
+    def get_book(book_title):
+        """Searches for books by title using Open Library API"""
+        response = requests.get(f"{BASE_URL}/search.json", params={"title": book_title})
         return response
 
     @staticmethod

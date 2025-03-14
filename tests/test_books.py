@@ -11,14 +11,10 @@ def test_create_book():
 
 @pytest.mark.book
 def test_get_book():
-    """Test retrieving a book by ID"""
-    create_response = APIClient.create_book("Retrieve Book", 1, 2)
-    assert create_response.status_code == 201
-    book_id = create_response.json()["id"]
-
-    get_response = APIClient.get_book(book_id)
-    assert get_response.status_code == 200
-    assert get_response.json()["title"] == "Retrieve Book"
+    """Test retrieving a book by title from Open Library"""
+    response = APIClient.get_book("Python")
+    assert response.status_code == 200
+    assert "docs" in response.json()  # Open
 
 @pytest.mark.book
 def test_update_book():
