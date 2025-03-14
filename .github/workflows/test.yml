@@ -29,6 +29,9 @@ jobs:
       - name: Set PYTHONPATH
         run: echo "PYTHONPATH=$GITHUB_WORKSPACE" >> $GITHUB_ENV
 
+      - name: Print PYTHONPATH
+        run: echo $PYTHONPATH
+
       - name: Debug Environment
         run: |
           pwd
@@ -36,7 +39,9 @@ jobs:
           python -c "import sys; print(sys.path)"
 
       - name: Test Import
-        run: python -c "from utils.api_client import APIClient; print('Import successful!')"
+        run: |
+          export PYTHONPATH=$PYTHONPATH:$(pwd)
+          python -c "from utils.api_client import APIClient; print('Import successful!')"
 
       - name: Run API Tests
         run: pytest tests --maxfail=3 --disable-warnings -v
